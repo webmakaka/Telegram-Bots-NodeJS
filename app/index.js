@@ -1,4 +1,5 @@
 const TelegramBot = require('node-telegram-bot-api');
+const debug = require('./helpers');
 const TOKEN = '5999391787:AAGawcbTLrsO5rrSJotbQoO5GuhaXkC3nAY';
 
 console.log('Bot has been started ...');
@@ -14,5 +15,21 @@ const bot = new TelegramBot(TOKEN, {
 });
 
 bot.on('message', (msg) => {
-  bot.sendMessage(msg.chat.id, 'Здравствуй, ' + msg.from.first_name);
+  const { id } = msg.chat;
+
+  if (msg.text.toLowerCase() === 'hello') {
+    bot.sendMessage(id, `Hello, ${msg.from.first_name}`);
+  } else {
+    bot.sendMessage(id, 'Здравствуй, ' + msg.from.first_name);
+    bot.sendMessage(id, debug(msg));
+  }
+
+  bot
+    .sendMessage(id, debug(msg))
+    .then(() => {
+      console.log('Message has been sent');
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 });

@@ -64,7 +64,7 @@ $ node ./index.js
 <br/>
 
 ```
-BotFather
+@BotFather
 
 /mybots
 ```
@@ -72,4 +72,47 @@ BotFather
 ```
 @WebmakakaBot -> /start
 Привет!
+```
+
+<br/>
+
+### Создание Telegram бота на Node.js / #5 - Настройки Bot Father 1
+
+<br/>
+
+```
+@BotFather
+
+setcommands
+
+start - Начать работу
+test - Протестировать
+help - Открыть помощь
+```
+
+<br/>
+
+### Создание Telegram бота на Node.js / #6 - Настройки Bot Father 2
+
+```
+// Обращаться к любому боту из любого чата?
+/setinline
+
+/setinlinegeo
+/setinlinefeedback
+/setprivacy
+```
+
+<br/>
+
+### Создание Telegram бота на Node.js / #7 - Настройка polling
+
+```
+/token
+```
+
+<br/>
+
+```
+$ npm start
 ```

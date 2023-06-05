@@ -36,7 +36,7 @@ const bot = new TelegramBot(TOKEN, {
 
 // ====================================================
 
-// Создание Telegram бота на Node.js / #9 - Обработка команд
+// #12 - Дополнительные опции сообщения
 
 // bot.onText(/\/start/, (msg) => {
 //   const { id } = msg.chat;
@@ -50,7 +50,7 @@ const bot = new TelegramBot(TOKEN, {
 
 // ====================================================
 
-// Создание Telegram бота на Node.js / #10 - Отправка HTML кода
+// #12 - Дополнительные опции сообщения
 
 // bot.on('message', (msg) => {
 //   const { id } = msg.chat;
@@ -71,18 +71,33 @@ const bot = new TelegramBot(TOKEN, {
 
 // ==================================================
 
-// Создание Telegram бота на Node.js / #11 - Отправка Markdown
+// #12 - Дополнительные опции сообщения
+
+// bot.on('message', (msg) => {
+//   const { id } = msg.chat;
+
+//   const markdown = `
+//     **Hello, ${msg.from.first_name}**
+//     _Привет!_
+//     [marley](https://marley.org)
+//   `;
+
+//   bot.sendMessage(id, markdown, {
+//     parse_mode: 'Markdown',
+//   });
+// });
+
+// ==================================================
+
+// #12 - Дополнительные опции сообщения
 
 bot.on('message', (msg) => {
   const { id } = msg.chat;
 
-  const markdown = `
-    **Hello, ${msg.from.first_name}**
-    _Привет!_
-    [marley](https://marley.org)
-  `;
-
-  bot.sendMessage(id, markdown, {
-    parse_mode: 'Markdown',
-  });
+  setTimeout(() => {
+    bot.sendMessage(id, `https://core.telegram.org/bots/api`, {
+      disable_web_page_preview: true,
+      disable_notification: true,
+    });
+  }, 3000);
 });

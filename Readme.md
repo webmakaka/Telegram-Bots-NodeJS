@@ -12,7 +12,7 @@ https://github.com/yagop/node-telegram-bot-api
 
 <br/>
 
-### Создание Telegram бота на Node.js / #3 - Регистрация бота
+### #3 - Регистрация бота
 
 ```
 https://t.me/BotFather
@@ -49,7 +49,7 @@ For a description of the Bot API, see this page: https://core.telegram.org/bots/
 
 <br/>
 
-### Создание Telegram бота на Node.js / #4 - Создание простого бота
+### #4 - Создание простого бота
 
 ```
 $ cd app
@@ -76,7 +76,7 @@ $ node ./index.js
 
 <br/>
 
-### Создание Telegram бота на Node.js / #5 - Настройки Bot Father 1
+### #5 - Настройки Bot Father 1
 
 <br/>
 
@@ -92,7 +92,7 @@ help - Открыть помощь
 
 <br/>
 
-### Создание Telegram бота на Node.js / #6 - Настройки Bot Father 2
+### #6 - Настройки Bot Father 2
 
 ```
 // Обращаться к любому боту из любого чата?
@@ -105,7 +105,7 @@ help - Открыть помощь
 
 <br/>
 
-### Создание Telegram бота на Node.js / #7 - Настройка polling
+### #7 - Настройка polling
 
 ```
 /token
@@ -119,16 +119,20 @@ $ npm start
 
 <br/>
 
-### Создание Telegram бота на Node.js / #8 - Получение сообщения пользователя
+### #8 - Получение сообщения пользователя
 
 <br/>
 
-### Создание Telegram бота на Node.js / #9 - Обработка команд
+### #9 - Обработка команд
 
 <br/>
 
-### Создание Telegram бота на Node.js / #10 - Отправка HTML кода
+### #10 - Отправка HTML кода
 
 <br/>
 
-### Создание Telegram бота на Node.js / #11 - Отправка Markdown
+### #11 - Отправка Markdown
+
+<br/>
+
+### #12 - Дополнительные опции сообщения

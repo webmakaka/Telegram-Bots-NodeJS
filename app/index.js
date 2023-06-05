@@ -150,28 +150,51 @@ const bot = new TelegramBot(TOKEN, {
 
 // 14 - Инлайн клавиатура
 
-bot.on('message', (msg) => {
-  const { id } = msg.chat;
+// bot.on('message', (msg) => {
+//   const { id } = msg.chat;
 
-  bot.sendMessage(id, 'Inline keyboard', {
-    reply_markup: {
-      inline_keyboard: [
-        [
-          {
-            text: 'Google',
-            url: 'https://google.com',
-          },
-        ],
-        [
-          { text: 'Reply', callback_data: 'reply' },
-          { text: 'Forward', callback_data: 'forward' },
-        ],
-      ],
-    },
-  });
+//   bot.sendMessage(id, 'Inline keyboard', {
+//     reply_markup: {
+//       inline_keyboard: [
+//         [
+//           {
+//             text: 'Google',
+//             url: 'https://google.com',
+//           },
+//         ],
+//         [
+//           { text: 'Reply', callback_data: 'reply' },
+//           { text: 'Forward', callback_data: 'forward' },
+//         ],
+//       ],
+//     },
+//   });
 
-  bot.on('callback_query', (query) => {
-    // bot.sendMessage(query.message.chat.id, debug(query));
-    bot.answerCallbackQuery(query.id, `${query.data}`);
+//   bot.on('callback_query', (query) => {
+//     // bot.sendMessage(query.message.chat.id, debug(query));
+//     bot.answerCallbackQuery(query.id, `${query.data}`);
+//   });
+// });
+
+// 15 - Обработка инлайн запросов
+
+bot.on('inline_query', (query) => {
+  const results = [];
+
+  for (let i = 0; i < 5; i++) {
+    results.push({
+      type: 'article',
+      id: i.toString(),
+      title: 'Title ' + i,
+      input_message_content: {
+        message_text: `Article #${i + 1}`,
+      },
+    });
+  }
+
+  console.log(results);
+
+  bot.answerInlineQuery(query.id, results, {
+    cache_time: 0,
   });
 });

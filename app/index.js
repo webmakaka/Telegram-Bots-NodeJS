@@ -91,13 +91,57 @@ const bot = new TelegramBot(TOKEN, {
 
 // #12 - Дополнительные опции сообщения
 
+// bot.on('message', (msg) => {
+//   const { id } = msg.chat;
+
+//   setTimeout(() => {
+//     bot.sendMessage(id, `https://core.telegram.org/bots/api`, {
+//       disable_web_page_preview: true,
+//       disable_notification: true,
+//     });
+//   }, 3000);
+// });
+
+// ==================================================
+
+// #13 - Простая клавиатура
+
 bot.on('message', (msg) => {
   const { id } = msg.chat;
 
-  setTimeout(() => {
-    bot.sendMessage(id, `https://core.telegram.org/bots/api`, {
-      disable_web_page_preview: true,
-      disable_notification: true,
+  if (msg.text === 'Закрыть') {
+    bot.sendMessage(id, 'Закрываю клавиатуру', {
+      reply_markup: {
+        remove_keyboard: true,
+      },
     });
-  }, 3000);
+  } else if (msg.text === 'Ответить') {
+    bot.sendMessage(id, 'Отвечаю', {
+      reply_markup: {
+        force_reply: true,
+      },
+    });
+  } else {
+    bot.sendMessage(id, 'Клавиатура', {
+      reply_markup: {
+        keyboard: [
+          [
+            {
+              text: 'Отправить местоположение',
+              request_location: true,
+            },
+          ],
+          ['Ответить', 'Закрыть'],
+          [
+            {
+              text: 'Отправить контакт',
+              request_contact: true,
+            },
+          ],
+        ],
+        resize_keyboard: true,
+        one_time_keyboard: true,
+      },
+    });
+  }
 });

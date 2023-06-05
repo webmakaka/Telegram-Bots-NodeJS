@@ -124,3 +124,7 @@ $ npm start
 <br/>
 
 ### Создание Telegram бота на Node.js / #9 - Обработка команд
+
+<br/>
+
+### Создание Telegram бота на Node.js / #10 - Отправка HTML кода

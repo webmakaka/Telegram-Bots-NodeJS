@@ -34,12 +34,37 @@ const bot = new TelegramBot(TOKEN, {
 //     });
 // });
 
-bot.onText(/\/start/, (msg) => {
-  const { id } = msg.chat;
-  bot.sendMessage(id, debug(msg));
-});
+// ====================================================
 
-bot.onText(/\/help (.+)/, (msg, [source, match]) => {
+// Создание Telegram бота на Node.js / #9 - Обработка команд
+
+// bot.onText(/\/start/, (msg) => {
+//   const { id } = msg.chat;
+//   bot.sendMessage(id, debug(msg));
+// });
+
+// bot.onText(/\/help (.+)/, (msg, [source, match]) => {
+//   const { id } = msg.chat;
+//   bot.sendMessage(id, debug(match));
+// });
+
+// ====================================================
+
+// Создание Telegram бота на Node.js / #10 - Отправка HTML кода
+
+bot.on('message', (msg) => {
   const { id } = msg.chat;
-  bot.sendMessage(id, debug(match));
+
+  const html = `
+    <strong>Hello, ${msg.from.first_name}</strong>
+    <i>Test message</i>
+    <a href="//marley.org">marley.org</a>
+    <pre>
+      ${debug(msg)}
+    </pre>
+  `;
+
+  bot.sendMessage(id, html, {
+    parse_mode: 'HTML',
+  });
 });

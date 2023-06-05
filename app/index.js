@@ -14,6 +14,8 @@ const bot = new TelegramBot(TOKEN, {
   },
 });
 
+// 8 - Получение сообщения пользователя
+
 // bot.on('message', (msg) => {
 //   const { id } = msg.chat;
 
@@ -36,7 +38,7 @@ const bot = new TelegramBot(TOKEN, {
 
 // ====================================================
 
-// #12 - Дополнительные опции сообщения
+// 9 - Обработка команд
 
 // bot.onText(/\/start/, (msg) => {
 //   const { id } = msg.chat;
@@ -50,7 +52,7 @@ const bot = new TelegramBot(TOKEN, {
 
 // ====================================================
 
-// #12 - Дополнительные опции сообщения
+// 10 - Отправка HTML кода
 
 // bot.on('message', (msg) => {
 //   const { id } = msg.chat;
@@ -71,7 +73,7 @@ const bot = new TelegramBot(TOKEN, {
 
 // ==================================================
 
-// #12 - Дополнительные опции сообщения
+// 11 - Отправка Markdown
 
 // bot.on('message', (msg) => {
 //   const { id } = msg.chat;
@@ -89,7 +91,7 @@ const bot = new TelegramBot(TOKEN, {
 
 // ==================================================
 
-// #12 - Дополнительные опции сообщения
+// 12 - Дополнительные опции сообщения
 
 // bot.on('message', (msg) => {
 //   const { id } = msg.chat;
@@ -104,44 +106,72 @@ const bot = new TelegramBot(TOKEN, {
 
 // ==================================================
 
-// #13 - Простая клавиатура
+// 13 - Простая клавиатура
+
+// bot.on('message', (msg) => {
+//   const { id } = msg.chat;
+
+//   if (msg.text === 'Закрыть') {
+//     bot.sendMessage(id, 'Закрываю клавиатуру', {
+//       reply_markup: {
+//         remove_keyboard: true,
+//       },
+//     });
+//   } else if (msg.text === 'Ответить') {
+//     bot.sendMessage(id, 'Отвечаю', {
+//       reply_markup: {
+//         force_reply: true,
+//       },
+//     });
+//   } else {
+//     bot.sendMessage(id, 'Клавиатура', {
+//       reply_markup: {
+//         keyboard: [
+//           [
+//             {
+//               text: 'Отправить местоположение',
+//               request_location: true,
+//             },
+//           ],
+//           ['Ответить', 'Закрыть'],
+//           [
+//             {
+//               text: 'Отправить контакт',
+//               request_contact: true,
+//             },
+//           ],
+//         ],
+//         resize_keyboard: true,
+//         one_time_keyboard: true,
+//       },
+//     });
+//   }
+// });
+
+// 14 - Инлайн клавиатура
 
 bot.on('message', (msg) => {
   const { id } = msg.chat;
 
-  if (msg.text === 'Закрыть') {
-    bot.sendMessage(id, 'Закрываю клавиатуру', {
-      reply_markup: {
-        remove_keyboard: true,
-      },
-    });
-  } else if (msg.text === 'Ответить') {
-    bot.sendMessage(id, 'Отвечаю', {
-      reply_markup: {
-        force_reply: true,
-      },
-    });
-  } else {
-    bot.sendMessage(id, 'Клавиатура', {
-      reply_markup: {
-        keyboard: [
-          [
-            {
-              text: 'Отправить местоположение',
-              request_location: true,
-            },
-          ],
-          ['Ответить', 'Закрыть'],
-          [
-            {
-              text: 'Отправить контакт',
-              request_contact: true,
-            },
-          ],
+  bot.sendMessage(id, 'Inline keyboard', {
+    reply_markup: {
+      inline_keyboard: [
+        [
+          {
+            text: 'Google',
+            url: 'https://google.com',
+          },
         ],
-        resize_keyboard: true,
-        one_time_keyboard: true,
-      },
-    });
-  }
+        [
+          { text: 'Reply', callback_data: 'reply' },
+          { text: 'Forward', callback_data: 'forward' },
+        ],
+      ],
+    },
+  });
+
+  bot.on('callback_query', (query) => {
+    // bot.sendMessage(query.message.chat.id, debug(query));
+    bot.answerCallbackQuery(query.id, `${query.data}`);
+  });
 });

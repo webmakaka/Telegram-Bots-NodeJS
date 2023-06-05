@@ -52,19 +52,37 @@ const bot = new TelegramBot(TOKEN, {
 
 // Создание Telegram бота на Node.js / #10 - Отправка HTML кода
 
+// bot.on('message', (msg) => {
+//   const { id } = msg.chat;
+
+//   const html = `
+//     <strong>Hello, ${msg.from.first_name}</strong>
+//     <i>Test message</i>
+//     <a href="//marley.org">marley.org</a>
+//     <pre>
+//       ${debug(msg)}
+//     </pre>
+//   `;
+
+//   bot.sendMessage(id, html, {
+//     parse_mode: 'HTML',
+//   });
+// });
+
+// ==================================================
+
+// Создание Telegram бота на Node.js / #11 - Отправка Markdown
+
 bot.on('message', (msg) => {
   const { id } = msg.chat;
 
-  const html = `
-    <strong>Hello, ${msg.from.first_name}</strong>
-    <i>Test message</i>
-    <a href="//marley.org">marley.org</a>
-    <pre>
-      ${debug(msg)}
-    </pre>
+  const markdown = `
+    **Hello, ${msg.from.first_name}**
+    _Привет!_
+    [marley](https://marley.org)
   `;
 
-  bot.sendMessage(id, html, {
-    parse_mode: 'HTML',
+  bot.sendMessage(id, markdown, {
+    parse_mode: 'Markdown',
   });
 });

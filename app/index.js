@@ -178,23 +178,61 @@ const bot = new TelegramBot(TOKEN, {
 
 // 15 - Обработка инлайн запросов
 
-bot.on('inline_query', (query) => {
-  const results = [];
+// bot.on('inline_query', (query) => {
+//   const results = [];
 
-  for (let i = 0; i < 5; i++) {
-    results.push({
-      type: 'article',
-      id: i.toString(),
-      title: 'Title ' + i,
-      input_message_content: {
-        message_text: `Article #${i + 1}`,
-      },
-    });
+//   for (let i = 0; i < 5; i++) {
+//     results.push({
+//       type: 'article',
+//       id: i.toString(),
+//       title: 'Title ' + i,
+//       input_message_content: {
+//         message_text: `Article #${i + 1}`,
+//       },
+//     });
+//   }
+
+//   console.log(results);
+
+//   bot.answerInlineQuery(query.id, results, {
+//     cache_time: 0,
+//   });
+// });
+
+// 16 - Перенаправление сообщений
+
+const inline_keyboard = [
+  [
+    { text: 'Forward', callback_data: 'forward' },
+    { text: 'Reply', callback_data: 'reply' },
+  ],
+  [
+    { text: 'Edit', callback_data: 'edit' },
+    { text: 'Delete', callback_data: 'delete' },
+  ],
+];
+
+bot.on('callback_query', (query) => {
+  const { chat, message_id, text } = query.message;
+
+  switch (query.data) {
+    case 'forward':
+      // куда, откуда, что
+      bot.forwardMessage(chat.id, chat.id, message_id);
+      break;
   }
 
-  console.log(results);
+  bot.answerCallbackQuery({
+    callback_query_id: query.id,
+  });
+});
 
-  bot.answerInlineQuery(query.id, results, {
-    cache_time: 0,
+bot.onText(/\/start/, (msg, [source, match]) => {
+  const chatId = msg.chat.id;
+
+  bot.sendMessage(chatId, 'keyboard', {
+    reply_markup: {
+      inline_keyboard,
+    },
   });
 });

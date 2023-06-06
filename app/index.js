@@ -1,5 +1,6 @@
 const TelegramBot = require('node-telegram-bot-api');
 const debug = require('./helpers');
+const fs = require('fs');
 const TOKEN = '5999391787:AAGawcbTLrsO5rrSJotbQoO5GuhaXkC3nAY';
 
 console.log('Bot has been started ...');
@@ -332,53 +333,65 @@ const bot = new TelegramBot(TOKEN, {
 
 // 19 - Удаление сообщенияs
 
-const inline_keyboard = [
-  [
-    { text: 'Forward', callback_data: 'forward' },
-    { text: 'Reply', callback_data: 'reply' },
-  ],
-  [
-    { text: 'Edit', callback_data: 'edit' },
-    { text: 'Delete', callback_data: 'delete' },
-  ],
-];
+// const inline_keyboard = [
+//   [
+//     { text: 'Forward', callback_data: 'forward' },
+//     { text: 'Reply', callback_data: 'reply' },
+//   ],
+//   [
+//     { text: 'Edit', callback_data: 'edit' },
+//     { text: 'Delete', callback_data: 'delete' },
+//   ],
+// ];
 
-bot.on('callback_query', (query) => {
-  const { chat, message_id, text } = query.message;
+// bot.on('callback_query', (query) => {
+//   const { chat, message_id, text } = query.message;
 
-  switch (query.data) {
-    case 'forward':
-      // куда, откуда, что
-      bot.forwardMessage(chat.id, chat.id, message_id);
-      break;
-    case 'reply':
-      bot.sendMessage(chat.id, `Отвечаем на сообщение`, {
-        reply_to_message_id: message_id,
-      });
-      break;
-    case 'edit':
-      bot.editMessageText(`${text} (edited)`, {
-        chat_id: chat.id,
-        message_id,
-        reply_markup: { inline_keyboard },
-      });
-      break;
-    case 'delete':
-      bot.deleteMessage(chat.id, message_id);
-      break;
-  }
+//   switch (query.data) {
+//     case 'forward':
+//       // куда, откуда, что
+//       bot.forwardMessage(chat.id, chat.id, message_id);
+//       break;
+//     case 'reply':
+//       bot.sendMessage(chat.id, `Отвечаем на сообщение`, {
+//         reply_to_message_id: message_id,
+//       });
+//       break;
+//     case 'edit':
+//       bot.editMessageText(`${text} (edited)`, {
+//         chat_id: chat.id,
+//         message_id,
+//         reply_markup: { inline_keyboard },
+//       });
+//       break;
+//     case 'delete':
+//       bot.deleteMessage(chat.id, message_id);
+//       break;
+//   }
 
-  bot.answerCallbackQuery({
-    callback_query_id: query.id,
-  });
+//   bot.answerCallbackQuery({
+//     callback_query_id: query.id,
+//   });
+// });
+
+// bot.onText(/\/start/, (msg, [source, match]) => {
+//   const chatId = msg.chat.id;
+
+//   bot.sendMessage(chatId, 'keyboard', {
+//     reply_markup: {
+//       inline_keyboard,
+//     },
+//   });
+// });
+
+// 20 - Отправка картинок
+
+bot.onText(/\/pic/, (msg) => {
+  bot.sendPhoto(msg.chat.id, fs.readFileSync(__dirname + '/kim.jpg'));
 });
 
-bot.onText(/\/start/, (msg, [source, match]) => {
-  const chatId = msg.chat.id;
-
-  bot.sendMessage(chatId, 'keyboard', {
-    reply_markup: {
-      inline_keyboard,
-    },
+bot.onText(/\/pic2/, (msg) => {
+  bot.sendPhoto(msg.chat.id, './kim.jpg', {
+    caption: 'This is Kim photo',
   });
 });

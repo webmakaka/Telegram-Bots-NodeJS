@@ -448,27 +448,35 @@ const bot = new TelegramBot(TOKEN, {
 
 // 24 - Отправка видео (mp4)
 
-bot.onText(/\/v1/, (msg) => {
+// bot.onText(/\/v1/, (msg) => {
+//   const chatId = msg.chat.id;
+
+//   bot.sendMessage(msg.chat.id, 'Sending Video ...');
+
+//   bot.sendVideo(chatId, 'https://techslides.com/demos/sample-videos/small.mp4');
+// });
+
+// bot.onText(/\/v2/, (msg) => {
+//   const chatId = msg.chat.id;
+
+//   bot.sendMessage(msg.chat.id, 'Sending Video ...');
+
+//   bot.sendVideo(chatId, './video.mp4');
+// });
+
+// bot.onText(/\/v3/, (msg) => {
+//   const chatId = msg.chat.id;
+//   bot.sendMessage(msg.chat.id, 'Sending video ...');
+
+//   fs.readFile(__dirname + '/video.mp4', (err, video) => {
+//     bot.sendVideo(chatId, video);
+//   });
+// });
+
+// 25 - Отправка геолокации
+
+bot.onText(/\/loc/, (msg) => {
   const chatId = msg.chat.id;
 
-  bot.sendMessage(msg.chat.id, 'Sending Video ...');
-
-  bot.sendVideo(chatId, 'https://techslides.com/demos/sample-videos/small.mp4');
-});
-
-bot.onText(/\/v2/, (msg) => {
-  const chatId = msg.chat.id;
-
-  bot.sendMessage(msg.chat.id, 'Sending Video ...');
-
-  bot.sendVideo(chatId, './video.mp4');
-});
-
-bot.onText(/\/v3/, (msg) => {
-  const chatId = msg.chat.id;
-  bot.sendMessage(msg.chat.id, 'Sending video ...');
-
-  fs.readFile(__dirname + '/video.mp4', (err, video) => {
-    bot.sendVideo(chatId, video);
-  });
+  bot.sendLocation(msg.chat.id, 56.8033462, 60.5795399);
 });

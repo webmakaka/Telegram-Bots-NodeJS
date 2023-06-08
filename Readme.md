@@ -218,3 +218,11 @@ $ npm start
 /v2
 /v3
 ```
+
+<br/>
+
+### 25 - Отправка геолокации (https://www.google.com/maps/)
+
+```
+/loc
+```

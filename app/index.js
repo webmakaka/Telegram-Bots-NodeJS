@@ -475,8 +475,18 @@ const bot = new TelegramBot(TOKEN, {
 
 // 25 - Отправка геолокации
 
-bot.onText(/\/loc/, (msg) => {
+// bot.onText(/\/loc/, (msg) => {
+//   const chatId = msg.chat.id;
+
+//   bot.sendLocation(msg.chat.id, 56.8033462, 60.5795399);
+// });
+
+// 26 - Отправка контакта
+
+bot.onText(/\/contact/, (msg) => {
   const chatId = msg.chat.id;
 
-  bot.sendLocation(msg.chat.id, 56.8033462, 60.5795399);
+  bot.sendContact(msg.chat.id, '89282002000', 'WebForMyself', {
+    last_name: 'Surname',
+  });
 });

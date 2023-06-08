@@ -412,23 +412,36 @@ const bot = new TelegramBot(TOKEN, {
 //   });
 // });
 
-// 22 - Отправка файла
-// gif, pdf, zip
+// 22 - Отправка файла (gif, pdf, zip)
 
-bot.onText(/\/doc1/, (msg) => {
-  bot.sendDocument(msg.chat.id, './file1.txt');
+// bot.onText(/\/doc1/, (msg) => {
+//   bot.sendDocument(msg.chat.id, './file1.txt');
+// });
+
+// bot.onText(/\/doc2/, (msg) => {
+//   bot.sendMessage(msg.chat.id, 'Upload start ...');
+
+//   fs.readFile(__dirname + '/file.zip', (err, file) => {
+//     bot
+//       .sendDocument(msg.chat.id, file, {
+//         caption: 'Additional text',
+//       })
+//       .then(() => {
+//         bot.sendMessage(msg.chat.id, 'Uploading finished...');
+//       });
+//   });
+// });
+
+// 23 - Отправка стикеров (webp)
+
+bot.onText(/\/s1/, (msg) => {
+  bot.sendSticker(msg.chat.id, './sticker.webp');
 });
 
-bot.onText(/\/doc2/, (msg) => {
+bot.onText(/\/s2/, (msg) => {
   bot.sendMessage(msg.chat.id, 'Upload start ...');
 
-  fs.readFile(__dirname + '/file.zip', (err, file) => {
-    bot
-      .sendDocument(msg.chat.id, file, {
-        caption: 'Additional text',
-      })
-      .then(() => {
-        bot.sendMessage(msg.chat.id, 'Uploading finished...');
-      });
+  fs.readFile(__dirname + '/sticker.webp', (err, sticker) => {
+    bot.sendSticker(msg.chat.id, sticker);
   });
 });

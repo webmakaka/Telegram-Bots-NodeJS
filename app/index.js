@@ -386,12 +386,28 @@ const bot = new TelegramBot(TOKEN, {
 
 // 20 - Отправка картинок
 
-bot.onText(/\/pic/, (msg) => {
-  bot.sendPhoto(msg.chat.id, fs.readFileSync(__dirname + '/kim.jpg'));
+// bot.onText(/\/pic/, (msg) => {
+//   bot.sendPhoto(msg.chat.id, fs.readFileSync(__dirname + '/kim.jpg'));
+// });
+
+// bot.onText(/\/pic2/, (msg) => {
+//   bot.sendPhoto(msg.chat.id, './kim.jpg', {
+//     caption: 'This is Kim photo',
+//   });
+// });
+
+// 21 - Отправка аудио
+
+bot.onText(/\/audio/, (msg) => {
+  bot.sendAudio(msg.chat.id, fs.readFileSync(__dirname + '/song.mp3'));
 });
 
-bot.onText(/\/pic2/, (msg) => {
-  bot.sendPhoto(msg.chat.id, './kim.jpg', {
-    caption: 'This is Kim photo',
+bot.onText(/\/audio2/, (msg) => {
+  bot.sendMessage(msg.chat.id, 'Start audio uploading...');
+
+  fs.readFile(__dirname + '/song.mp3', (err, data) => {
+    bot.sendAudio(msg.chat.id, data).then(() => {
+      bot.sendMessage(msg.chat.id, 'Uploadding finished...');
+    });
   });
 });

@@ -434,14 +434,41 @@ const bot = new TelegramBot(TOKEN, {
 
 // 23 - Отправка стикеров (webp)
 
-bot.onText(/\/s1/, (msg) => {
-  bot.sendSticker(msg.chat.id, './sticker.webp');
+// bot.onText(/\/s1/, (msg) => {
+//   bot.sendSticker(msg.chat.id, './sticker.webp');
+// });
+
+// bot.onText(/\/s2/, (msg) => {
+//   bot.sendMessage(msg.chat.id, 'Upload start ...');
+
+//   fs.readFile(__dirname + '/sticker.webp', (err, sticker) => {
+//     bot.sendSticker(msg.chat.id, sticker);
+//   });
+// });
+
+// 24 - Отправка видео (mp4)
+
+bot.onText(/\/v1/, (msg) => {
+  const chatId = msg.chat.id;
+
+  bot.sendMessage(msg.chat.id, 'Sending Video ...');
+
+  bot.sendVideo(chatId, 'https://techslides.com/demos/sample-videos/small.mp4');
 });
 
-bot.onText(/\/s2/, (msg) => {
-  bot.sendMessage(msg.chat.id, 'Upload start ...');
+bot.onText(/\/v2/, (msg) => {
+  const chatId = msg.chat.id;
 
-  fs.readFile(__dirname + '/sticker.webp', (err, sticker) => {
-    bot.sendSticker(msg.chat.id, sticker);
+  bot.sendMessage(msg.chat.id, 'Sending Video ...');
+
+  bot.sendVideo(chatId, './video.mp4');
+});
+
+bot.onText(/\/v3/, (msg) => {
+  const chatId = msg.chat.id;
+  bot.sendMessage(msg.chat.id, 'Sending video ...');
+
+  fs.readFile(__dirname + '/video.mp4', (err, video) => {
+    bot.sendVideo(chatId, video);
   });
 });

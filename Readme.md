@@ -204,4 +204,17 @@ $ npm start
 
 ```
 /s1
+/s2
+```
+
+<br/>
+
+### 24 - Отправка видео (mp4)
+
+// https://techslides.com/demos/sample-videos/small.mp4
+
+```
+/v1
+/v2
+/v3
 ```

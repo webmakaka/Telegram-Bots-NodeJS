@@ -398,16 +398,37 @@ const bot = new TelegramBot(TOKEN, {
 
 // 21 - Отправка аудио
 
-bot.onText(/\/audio/, (msg) => {
-  bot.sendAudio(msg.chat.id, fs.readFileSync(__dirname + '/song.mp3'));
+// bot.onText(/\/audio/, (msg) => {
+//   bot.sendAudio(msg.chat.id, fs.readFileSync(__dirname + '/song.mp3'));
+// });
+
+// bot.onText(/\/audio2/, (msg) => {
+//   bot.sendMessage(msg.chat.id, 'Start audio uploading...');
+
+//   fs.readFile(__dirname + '/song.mp3', (err, data) => {
+//     bot.sendAudio(msg.chat.id, data).then(() => {
+//       bot.sendMessage(msg.chat.id, 'Uploading finished...');
+//     });
+//   });
+// });
+
+// 22 - Отправка файла
+// gif, pdf, zip
+
+bot.onText(/\/doc1/, (msg) => {
+  bot.sendDocument(msg.chat.id, './file1.txt');
 });
 
-bot.onText(/\/audio2/, (msg) => {
-  bot.sendMessage(msg.chat.id, 'Start audio uploading...');
+bot.onText(/\/doc2/, (msg) => {
+  bot.sendMessage(msg.chat.id, 'Upload start ...');
 
-  fs.readFile(__dirname + '/song.mp3', (err, data) => {
-    bot.sendAudio(msg.chat.id, data).then(() => {
-      bot.sendMessage(msg.chat.id, 'Uploadding finished...');
-    });
+  fs.readFile(__dirname + '/file.zip', (err, file) => {
+    bot
+      .sendDocument(msg.chat.id, file, {
+        caption: 'Additional text',
+      })
+      .then(() => {
+        bot.sendMessage(msg.chat.id, 'Uploading finished...');
+      });
   });
 });
